@@ -1,0 +1,46 @@
+{
+  "name": "blood-donation-backend",
+  "version": "0.0.1",
+  "description": "Backend server for blood donation application",
+  "main": "set NODE_ENV=dev && nodemon server.js",
+  "scripts": {
+    "dev": "set NODE_ENV=dev && nodemon server.js",
+    "test": "mocha --exit",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": " "
+  },
+  "author": "The entrepreneurs",
+  "license": "ISC",
+  "bugs": {
+    "url": " "
+  },
+  "homepage": " ",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
+    "express": "^4.17.1",
+    "express-list-endpoints": "^4.0.1",
+    "github-api": "^3.3.0",
+    "hubspot": "^2.3.1",
+    "lodash": "^4.17.15",
+    "mocha": "^7.1.0",
+    "mongodb": "^3.3.0",
+    "mongoose": "^5.9.3",
+    "supertest": "^4.0.2",
+    "swagger-jsdoc": "^3.4.0",
+    "swagger-ui-express": "^4.0.7"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^8.0.6",
+    "babel-preset-es2015": "^6.24.1",
+    "express-list-endpoints": "^4.0.1",
+    "nodemon": "^1.19.1",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7"
+  }
+}

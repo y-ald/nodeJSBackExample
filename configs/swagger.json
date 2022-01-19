@@ -1,0 +1,1051 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Documentation Api backend",
+    "contact": {
+      "name": "Steve ELANGA",
+      "email": "leonelelanga@yahoo.fr"
+    },
+    "description": "This is the documentation of the Backend Server for blood donation application. You can test your api and see what params are required for each route in API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "blood-donation-backend.com",
+  "basePath": "/api/v1",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "definitions": {
+    "doctor": {
+      "description": "this object describes a doctor",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the doctor"
+        },
+        "surname": {
+          "type": "string",
+          "description": "Surame of the doctor"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "the phone number of the doctor"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "the email of the doctor"
+        },
+        "image": {
+          "type": "object",
+          "properties": {
+            "file": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "string",
+                  "format": "binary"
+                },
+                "contentType": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "town": {
+          "type": "string",
+          "description": "the town of the doctor"
+        },
+        "street": {
+          "type": "string",
+          "description": "the street of the doctor"
+        },
+        "referenceStreet": {
+          "type": "string",
+          "description": "a better precision of the location of the doctor"
+        },
+        "region": {
+          "type": "string",
+          "description": "what region are you from ?"
+        },
+        "hospital": {
+          "type": "string",
+          "description": "the id of the hospital of the doctor"
+        },
+        "birthday": {
+          "type": "string",
+          "format": "date",
+          "description": "the birthday of the doctor"
+        },
+        "identityCard": {
+          "type": "object",
+          "properties": {
+            "file": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "string",
+                  "format": "binary"
+                },
+                "contentType": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "donor": {
+      "description": "this object describes a donor",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the donor"
+        },
+        "surname": {
+          "type": "string",
+          "description": "Surame of the donor"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "the phone number of the donor"
+        },
+        "phoneNumberSibling": {
+          "type": "string",
+          "description": "the phone number of a donor's sibling"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "the email of the donor"
+        },
+        "picFile": {
+          "type": "object",
+          "properties": {
+            "file": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "string",
+                  "format": "binary"
+                },
+                "contentType": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "state": {
+          "type": "string",
+          "description": "the state of the donor",
+          "enum": [
+            "eligible",
+            "illegible"
+          ]
+        },
+        "town": {
+          "type": "string",
+          "description": "the town of the donor"
+        },
+        "street": {
+          "type": "string",
+          "description": "the street of the donor"
+        },
+        "referenceStreet": {
+          "type": "string",
+          "description": "a better precision of the location of the donor"
+        },
+        "motivations" : {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "a list of motivations of the donor"
+        },
+        "region": {
+          "type": "string",
+          "description": "what region are you from ?"
+        },
+        "birthday" : {
+          "type": "string",
+          "format": "date",
+          "description": "the birthday of the donor"
+        },
+        "maritalStatut": {
+          "type": "string",
+          "enum": [
+            "single",
+            "married",
+            "divorced",
+            "pacsed"
+          ],
+          "description": "Marital statut of the donor"
+        },
+        "profession" : {
+          "type": "string",
+          "description": "the profession of the donor"
+        },
+        "religion": {
+          "type": "string",
+          "description": "the religion of the user"
+        },
+        "identityCardFile": {
+          "type": "object",
+          "properties": {
+            "file": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "string",
+                  "format": "binary"
+                },
+                "contentType": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "bloodGroup" : {
+          "type": "string",
+          "description": "the blood Group of the donor"
+        },
+        "rhesusFactor" : {
+          "type": "string",
+          "description": "the rhesus Factor of the donor"
+        },
+        "identification": {
+          "type": "integer",
+          "description": " A number generated for a patient to identify him"
+        },
+        "files" : {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "file": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "contentType": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "description": "the array of files which are related to the donor"
+        }
+      }
+    },
+    "registration": {
+      "description": "This object describes a donation registration",
+      "type": "object",
+      "properties": {
+        "registrationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "the date of the donation registration"
+        },
+        "hospital" : {
+          "type": "string",
+          "description": "the id of the hospital in where we will store the blood pocket"
+        },
+        "donor" : {
+          "type": "string",
+          "description": "the id of the donor who was registered"
+        }
+      }
+    },
+    "hospital": {
+      "description": "this object describes an hospital",
+      "type": "object",
+      "properties": {
+        "hospitalType": {
+          "type": "string",
+          "enum": [
+            "private",
+            "public"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "the name of the hospital"
+        },
+        "email" : {
+          "type": "string",
+          "description": "Email of the hospital"
+        },
+        "phoneNumber": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "phone Number of the hospital"
+        },
+        "registrationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "the date of the hospital account registration"
+        },
+        "town": {
+          "type": "string",
+          "description": "the town of the hospital"
+        },
+        "street": {
+          "type": "string",
+          "description": "the street of the hospital"
+        },
+        "referenceStreet": {
+          "type": "string",
+          "description": "a better precision of the location of the hospital"
+        }
+      }
+    },
+    "healthBackground": {
+      "description": "this object describes the background about the health of a donor",
+      "type": "object",
+      "properties": {
+        "donor": {
+          "type": "string",
+          "description": "the id of the donor "
+        },
+        "nb_blood_donation": {
+          "type": "integer",
+          "description": "how many times did the person make blood donation before",
+          "minItems": 0
+        },
+        "accidents_donation": {
+          "description": "did accidents happen during a blood donation in the past ? when ?",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "describe accidents"
+          }
+        },
+        "transfusion_date": {
+          "description": "have you ever had a blood transfusion? descriptions",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "accidents_transfusion": {
+          "description": "did accidents happen during a blood transfusion in the past ? descriptions ",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "describe accidents"
+          }
+        }
+      }
+    },
+    "donation": {
+      "description": "this object describes a donation",
+      "type": "object",
+      "properties": {
+        "donor": {
+          "type": "string",
+          "description": "the id of the donor"
+        },
+        "donationDate" : {
+          "type": "string",
+          "format": "date-time",
+          "description": "the date of the donation"
+        },
+        "donationType" : {
+          "type": "string",
+          "description": " what kind of donation it is ? ",
+          "enum": ["volunteer", "alerted", "campaign"],
+          "default": "volunteer"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/donation": {
+      "post": {
+        "tags": [
+          "Donations"
+        ],
+        "description": "Create new donation in the database",
+        "summary": "create a new donation account",
+        "parameters": [
+          {
+            "name": "donation",
+            "in": "body",
+            "description": "donation that we want to create",
+            "schema": {
+              "$ref": "#/definitions/donation"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New donation is created",
+            "schema": {
+              "$ref": "#/definitions/donation"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Donations"
+        ],
+        "summary": "Get all donations in the database",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The donation PageSize that needs to be fetched. Example=10, 20 etc.",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The donation pageNo that needs to be fetched. Example=1,2 etc.",
+            "required": false,
+            "type": "number"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/donation"
+            }
+          }
+        }
+      }
+    },
+    "/donation/{id}": {
+      "delete": {
+        "tags": [
+          "Donations"
+        ],
+        "description": "delete a specific donation account",
+        "summary": "delete a specific donation",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "the id of the donation that will be deleted",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "donation deleted successfully"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Donations"
+        ],
+        "description": "Modify information for a specific donation",
+        "summary": "Modify information for a specific donation",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "donation",
+            "in": "body",
+            "description": "updated information about a specific donation",
+            "schema": {
+              "$ref": "#/definitions/donation"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "the id of the donation that will receive updates",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "updated donation",
+            "schema": {
+              "$ref": "#/definitions/donation"
+            }
+          }
+        }
+      }
+    },
+    "/registration": {
+      "post": {
+        "tags": [
+          "Registrations"
+        ],
+        "description": "Create new registration in the database",
+        "summary": "create a new registration account",
+        "parameters": [
+          {
+            "name": "registration",
+            "in": "body",
+            "description": "registration that we want to create",
+            "schema": {
+              "$ref": "#/definitions/registration"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New registration is created",
+            "schema": {
+              "$ref": "#/definitions/registration"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Registrations"
+        ],
+        "summary": "Get all registrations in the database",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The registration PageSize that needs to be fetched. Example=10, 20 etc.",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The registration pageNo that needs to be fetched. Example=1,2 etc.",
+            "required": false,
+            "type": "number"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/registration"
+            }
+          }
+        }
+      }
+    },
+    "/registration/{id}": {
+      "delete": {
+        "tags": [
+          "Registrations"
+        ],
+        "description": "delete a specific registration account",
+        "summary": "delete a specific registration",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "the id of the registration that will be deleted",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "registration deleted successfully"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Registrations"
+        ],
+        "description": "Modify information for a specific registration",
+        "summary": "Modify information for a specific registration",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "registration",
+            "in": "body",
+            "description": "updated information about a specific registration",
+            "schema": {
+              "$ref": "#/definitions/registration"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "the id of the registration that will receive updates",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "updated registration",
+            "schema": {
+              "$ref": "#/definitions/registration"
+            }
+          }
+        }
+      }
+    },
+    "/healthBackground": {
+      "post": {
+        "tags": [
+          "HealthBackgrounds"
+        ],
+        "description": "Create new healthBackground in the database",
+        "summary": "create a new healthBackground account",
+        "parameters": [
+          {
+            "name": "healthBackground",
+            "in": "body",
+            "description": "healthBackground that we want to create",
+            "schema": {
+              "$ref": "#/definitions/healthBackground"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New healthBackground is created",
+            "schema": {
+              "$ref": "#/definitions/healthBackground"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "HealthBackgrounds"
+        ],
+        "summary": "Get all healthBackgrounds in the database",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The healthBackground PageSize that needs to be fetched. Example=10, 20 etc.",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The healthBackground pageNo that needs to be fetched. Example=1,2 etc.",
+            "required": false,
+            "type": "number"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/healthBackground"
+            }
+          }
+        }
+      }
+    },
+    "/healthBackground/{id}": {
+      "delete": {
+        "tags": [
+          "HealthBackgrounds"
+        ],
+        "description": "delete a specific healthBackground account",
+        "summary": "delete a specific healthBackground",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "the id of the healthBackground that will be deleted",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "healthBackground deleted successfully"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "HealthBackgrounds"
+        ],
+        "description": "Modify information for a specific healthBackground",
+        "summary": "Modify information for a specific healthBackground",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "healthBackground",
+            "in": "body",
+            "description": "updated information about a specific healthBackground",
+            "schema": {
+              "$ref": "#/definitions/healthBackground"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "the id of the healthBackground that will receive updates",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "updated healthBackground",
+            "schema": {
+              "$ref": "#/definitions/healthBackground"
+            }
+          }
+        }
+      }
+    },
+    "/hospital": {
+      "post": {
+        "tags": [
+          "Hospitals"
+        ],
+        "description": "Create new hospital in the database",
+        "summary": "create a new hospital account",
+        "parameters": [
+          {
+            "name": "hospital",
+            "in": "body",
+            "description": "hospital that we want to create",
+            "schema": {
+              "$ref": "#/definitions/hospital"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New hospital is created",
+            "schema": {
+              "$ref": "#/definitions/hospital"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Hospitals"
+        ],
+        "summary": "Get all hospitals in the database",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The hospital PageSize that needs to be fetched. Example=10, 20 etc.",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The hospital pageNo that needs to be fetched. Example=1,2 etc.",
+            "required": false,
+            "type": "number"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/hospital"
+            }
+          }
+        }
+      }
+    },
+    "/hospital/{id}": {
+      "delete": {
+        "tags": [
+          "Hospitals"
+        ],
+        "description": "delete a specific hospital account",
+        "summary": "delete a specific hospital",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "the id of the hospital that will be deleted",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "hospital deleted successfully"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Hospitals"
+        ],
+        "description": "Modify information for a specific hospital",
+        "summary": "Modify information for a specific hospital",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "hospital",
+            "in": "body",
+            "description": "updated information about a specific hospital",
+            "schema": {
+              "$ref": "#/definitions/hospital"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "the id of the hospital that will receive updates",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "updated hospital",
+            "schema": {
+              "$ref": "#/definitions/hospital"
+            }
+          }
+        }
+      }
+    },
+    "/donor/{id}": {
+      "delete": {
+        "tags": [
+          "Donors"
+        ],
+        "description": "delete a specific donor account",
+        "summary": "delete a specific donor account",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "the id of the donor who will be deleted",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "donor account deleted successfully"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Donors"
+        ],
+        "description": "Modify information for a specific donor",
+        "summary": "Modify information for a specific donor",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "donor",
+            "in": "body",
+            "description": "updated information about a specific donor",
+            "schema": {
+              "$ref": "#/definitions/donor"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "the id of the donor who will receive updates",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "updated donor",
+            "schema": {
+              "$ref": "#/definitions/donor"
+            }
+          }
+        }
+      }
+    },
+    "/donor": {
+      "post": {
+        "tags": [
+          "Donors"
+        ],
+        "description": "Create new donor in the database",
+        "summary": "create a new donor account",
+        "parameters": [
+          {
+            "name": "donor",
+            "in": "body",
+            "description": "Donor that we want to create",
+            "schema": {
+              "$ref": "#/definitions/donor"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New Donor is created",
+            "schema": {
+              "$ref": "#/definitions/donor"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Donors"
+        ],
+        "summary": "Get all donors in the database",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The donor PageSize that needs to be fetched. Example=10, 20 etc.",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The donor pageNo that needs to be fetched. Example=1,2 etc.",
+            "required": false,
+            "type": "number"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/donor"
+            }
+          }
+        }
+      }
+    }
+  }
+}

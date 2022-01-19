@@ -1,0 +1,50 @@
+image: node:latest
+
+stages:
+  - build
+  - test
+  - deployment
+
+cache:
+  paths:
+    - node_modules/
+
+install_dependencies:
+  stage: build
+  script:
+    - npm install
+  artifacts:
+    expire_in: 2 mins
+    paths:
+      - node_modules/
+  only:
+    - master
+    - release
+
+unittest:
+  stage: test
+  script: npm run test
+
+
+production:
+  stage: deployment
+  image: ruby:latest
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=blooddonnation --api-key=$HEROKU_API_KEY_PROD
+  only:
+    - master
+
+release:
+  stage: deployment
+  image: ruby:latest
+  script:
+    - apt-get update -qy
+    - apt-get install ruby ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=blooddonnation-dev --api-key=$HEROKU_API_KEY_DEV
+  only:
+    - release
+
